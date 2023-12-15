@@ -1,13 +1,18 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta de historico de cliente</title>
+    <title>Consulta de Código</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <center>
-        Clique neste se você é das vendas: <a href="vendas/index.html">Vendas</a> <br>
-        Clique neste se você for representante: <a href="representa/index.html">Representa</a>
-    </center>
+<center>
+    <label for="codigo">Digite o Código:</label>
+    <input type="text" id="codigo" name="codigo">
+    <button onclick="consultarCodigo()">Consultar</button>
+    <div id="resultado"></div>
+    <script src="script.js"></script>
+</center>
 </body>
 </html>
