@@ -87,7 +87,7 @@ if ($result->num_rows > 0) {
     echo '
         <input type="text" name="vendedor" id="vendedor" placeholder="Vendedor">
         <input type="text" name="observacao" id="observacao" placeholder="Observação">
-        <button onclick="triggerInsert()">Gravar</button>
+        <button onclick="triggerInsert(); consultarCodigo();">Gravar</button>
     ';
 
 } else {

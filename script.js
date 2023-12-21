@@ -1,5 +1,5 @@
 document.getElementById("codigo").addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
+    if (event.key === "Enter") {
         event.preventDefault();
         consultarCodigo();
     }
