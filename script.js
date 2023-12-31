@@ -44,6 +44,6 @@ function triggerInsert() {
         return;
     }
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", "sql.php?codigo=" + codigo + "&vendedor=" + vendedor + "&observacao=" + observacao, true);
+    xhr.open("GET", "insertData.php?codigo=" + codigo + "&vendedor=" + vendedor + "&observacao=" + observacao, true);
     xhr.send();
 }
