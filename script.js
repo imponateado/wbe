@@ -17,21 +17,26 @@ document.body.addEventListener("keyup", function(event){
 function consultarCodigo() {
     let codigo = document.getElementById("codigo").value;
 
-    // Verifica se o campo código está preenchido
     if (codigo === "") {
         alert("Por favor, digite um código.");
         return;
     }
 
-    // Faz uma requisição ao servidor PHP para obter os dados do banco de dados
-    let xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("resultado").innerHTML = this.responseText;
+    let url = window.location.href + "consulta.php?codigo=" + codigo;
+    
+    fetch(url)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("HTTP error " + response.status);
         }
-    };
-    xhr.open("GET", "consulta.php?codigo=" + codigo, true);
-    xhr.send();
+        return response.text();
+    })
+    .then(data => {
+        document.getElementById("resultado").innerHTML = data;
+    })
+    .catch(function(err) {
+        console.log("Fetch Error :-S", err);
+    });
 }
 
 function triggerInsert() {
@@ -40,10 +45,19 @@ function triggerInsert() {
     let observacao = document.getElementById("observacao").value;
 
     if(codigo === "" && vendedor === "" && observacao === "") {
-        alert("Algum dos campos, código, vendedor ou observação, está faltando.");
+        alert("Algum dos campos, código, vendedor ou observação está faltando.");
         return;
     }
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", "insertData.php?codigo=" + codigo + "&vendedor=" + vendedor + "&observacao=" + observacao, true);
-    xhr.send();
+
+    let url = window.location.href + "insertData.php?codigo=" + codigo + "&vendedor=" + vendedor + "&observacao=" + observacao;
+
+    fetch(url)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("HTTP error " + response.status);
+        }
+    })
+    .catch(function() {
+        console.log("Fetch error :-S", err);
+    });
 }
