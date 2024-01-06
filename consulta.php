@@ -10,6 +10,7 @@ $result = $conn->query($sql);
 
 // Exibe os resultados
 if ($result->num_rows > 0) {
+    /*
     echo "<br>";
     echo "<table border=1>";
         echo "<tr>";
@@ -23,6 +24,26 @@ if ($result->num_rows > 0) {
             echo "<td>Valor já comprado</td>"; //8
             echo "<td>Dias desde última compra</td>"; //9
         echo "</tr>";
+        */
+    echo
+    '
+    <br>
+    <table border=1>
+        <tr>
+            <td colspan=10 style="text-align: center; font-size: 1.2rem;">Dados do cliente</td>
+        </tr>
+        <tr>
+            <td>Cliente</td>
+            <td>CPF/CNPJ</td>
+            <td>Endereço</td>
+            <td>Cidade</td>
+            <td>Telefone</td>
+            <td>E-mail</td>
+            <td>Data da última compra</td>
+            <td>Valor já comprado<td/>
+            <td>Dias desde última compra</td>
+        </tr>
+    ';
         while($row = $result->fetch_assoc()) {
         echo "
         <tr>
@@ -56,23 +77,29 @@ if ($result->num_rows > 0) {
     $hstQuery = "SELECT * FROM historico WHERE codigo = '$codigo'";
     $hstResult = $conn->query($hstQuery);
 
-    echo "<table border=1>";
-    echo '
+    if($hstResult->num_rows > 0) {
+        echo
+        '<table border=1>
         <tr>
             <td>Data</td>
             <td>Vendedor</td>
             <td>Observação</td>
         </tr>
-    ';
-
-    while($row = $hstResult->fetch_assoc()) {
-        echo "<tr>";
-            echo "<td>" . $row["data"] . "</td>";
-            echo "<td>" . $row["vendedor"] . "</td>";
-            echo "<td>" . $row["observacao"] ."</td>";
-        echo "</tr>";
+        ';
+        while($row = $hstResult->fetch_assoc()) {
+            echo 
+            '
+            <tr>
+                <td>' . $row["data"] . '</td>
+                <td>' . $row["vendedor"] . '</td>
+                <td>' . $row["observacao"] . '</td>
+            </tr>
+            ';
+        }
+        echo '</table>';
+    } else {
+        echo '<br><table border="1"><tr><td>Cliente ainda não tem histórico</td></tr></table>';
     }
-    echo "</table>";
 
     echo '<br>';
     echo '
@@ -83,7 +110,7 @@ if ($result->num_rows > 0) {
     ';
 
 } else {
-    echo "<br>Este cliente não existe.";
+    echo '<br><table border="1"><tr><td>Este cliente não existe</td></tr></table>';
 }
 
 
